@@ -3,62 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TurboCar Chile - Oferta Viral</title>
+    <title>{{ producto.nombre }} - TurboCar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        /* Estilo para los acordeones */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
 </head>
-<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-50 min-h-screen">
 
-    <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-md w-full border border-gray-100">
-        
-        <div class="flex justify-between items-center mb-4">
-            <span class="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold animate-pulse">🔥 OFERTA FLASH</span>
-            <span class="text-xs text-gray-500 font-medium">Stock: Últimas 3 unidades</span>
+    <nav class="bg-white shadow-sm sticky top-0 z-50 p-4">
+        <div class="container mx-auto flex justify-between items-center max-w-5xl">
+            <a href="/" class="text-xl font-bold italic text-slate-900"><i class="fas fa-arrow-left mr-2"></i>TurboCar</a>
+            <span class="text-xs font-bold bg-blue-100 text-blue-600 px-2 py-1 rounded">ENVÍO GRATIS</span>
         </div>
+    </nav>
 
-        <div class="relative">
-            <img src="{{ producto.imagen }}" alt="Aspiradora Viral" class="w-full h-64 object-cover rounded-xl shadow-sm">
-            <div class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
-                ⭐ 4.9/5 Calificación
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 bg-white p-0 md:p-6 rounded-3xl md:shadow-xl">
+            
+            <div class="relative">
+                <div class="sticky top-24">
+                    <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" class="w-full rounded-2xl shadow-lg border border-gray-100">
+                    <div class="flex justify-center gap-4 mt-4 text-sm text-gray-500">
+                        <div class="flex items-center gap-1"><i class="fas fa-lock text-green-500"></i> Compra Segura</div>
+                        <div class="flex items-center gap-1"><i class="fas fa-check-circle text-blue-500"></i> Stock Disponible</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <span class="bg-red-600 text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-wider mb-2 inline-block">🔥 Oferta Viral</span>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight mb-2">{{ producto.nombre }}</h1>
+                
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="text-yellow-400 text-sm">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <span class="text-sm text-blue-600 underline font-medium">4.9/5 (128 Reseñas)</span>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 mb-6">
+                    <span class="text-gray-500 text-sm font-medium">Precio Total (Pago al Recibir):</span>
+                    <div class="flex items-end gap-3 mt-1">
+                        <span class="text-4xl font-black text-slate-900">${{ "{:,.0f}".format(producto.precio).replace(',', '.') }}</span>
+                        <span class="text-lg text-gray-400 line-through mb-1">${{ "{:,.0f}".format(producto.antes).replace(',', '.') }}</span>
+                        <span class="text-xs bg-red-100 text-red-600 font-bold px-2 py-1 rounded mb-2">-50%</span>
+                    </div>
+                    <p class="text-green-600 text-xs font-bold mt-2"><i class="fas fa-truck"></i> Envío Gratis a todo Chile</p>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="font-bold text-gray-900 mb-3">¿Por qué elegir este producto?</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-square text-green-500 mt-1 text-lg"></i>
+                            <span class="text-gray-600 text-sm leading-relaxed">{{ producto.descripcion }}</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-square text-green-500 mt-1 text-lg"></i>
+                            <span class="text-gray-600 text-sm">Ideal para viajes, emergencias y mantención rápida.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-square text-green-500 mt-1 text-lg"></i>
+                            <span class="text-gray-600 text-sm">Pago contra reembolso: abonás al recibir en tu casa.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <button onclick="pedirPorWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-xl shadow-xl transform transition hover:scale-105 flex justify-center items-center gap-3 text-lg mb-6 animate-bounce-slow">
+                    <i class="fab fa-whatsapp text-3xl"></i>
+                    <div>
+                        <div class="text-xs font-normal uppercase opacity-90">Pedir ahora</div>
+                        <div class="leading-none">PEDIR Y PAGAR EN CASA</div>
+                    </div>
+                </button>
+
+                <div class="border-t border-gray-200">
+                    <details class="group py-4 border-b border-gray-200 cursor-pointer">
+                        <summary class="flex justify-between items-center font-bold text-gray-800">
+                            <span>📦 Información de envío</span>
+                            <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                        </summary>
+                        <div class="text-gray-600 text-sm mt-3 pl-4">
+                            <ul class="list-disc">
+                                <li>Envío Gratis a todo el país.</li>
+                                <li>Tiempo estimado: 2 a 5 días hábiles.</li>
+                                <li>Enviamos vía BlueExpress o Starken.</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details class="group py-4 border-b border-gray-200 cursor-pointer">
+                        <summary class="flex justify-between items-center font-bold text-gray-800">
+                            <span>🛡️ Garantía y Devoluciones</span>
+                            <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                        </summary>
+                        <div class="text-gray-600 text-sm mt-3 pl-4">
+                            <p>Garantía de 30 días por fallas de fábrica. Si el producto llega dañado, te enviamos uno nuevo sin costo.</p>
+                        </div>
+                    </details>
+                </div>
+
             </div>
         </div>
-        
-        <div class="mt-5 text-center">
-            <h1 class="text-3xl font-extrabold text-gray-900 leading-tight">{{ producto.nombre }}</h1>
-            <p class="text-gray-600 mt-3 text-sm leading-relaxed">{{ producto.descripcion }}</p>
-        </div>
-
-        <div class="flex justify-center items-end gap-2 my-6">
-            <span class="text-4xl font-black text-slate-800">$24.990</span>
-            <span class="text-lg text-gray-400 line-through mb-1">$49.990</span>
-        </div>
-
-        <div class="flex justify-around text-xs text-gray-500 mb-6 border-t border-b border-gray-100 py-3">
-            <div class="flex flex-col items-center gap-1"><i class="fas fa-truck text-blue-500 text-lg"></i><span>Envío Rápido</span></div>
-            <div class="flex flex-col items-center gap-1"><i class="fas fa-hand-holding-dollar text-green-500 text-lg"></i><span>Pago en Casa</span></div>
-            <div class="flex flex-col items-center gap-1"><i class="fas fa-shield-alt text-purple-500 text-lg"></i><span>Garantía</span></div>
-        </div>
-
-        <button onclick="pedirPorWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transform transition hover:scale-105 flex justify-center items-center gap-3 text-lg">
-            <i class="fab fa-whatsapp text-2xl"></i>
-            PEDIR Y PAGAR EN CASA
-        </button>
-
-        <p class="text-center text-xs text-gray-400 mt-4">🔒 Compra 100% Segura sin tarjeta</p>
     </div>
 
     <script>
         function pedirPorWhatsApp() {
-            // AQUÍ PONES TU NÚMERO (Formato: 569...)
             let telefono = "56954055268"; 
-            
             let producto = "{{ producto.nombre }}";
-            let precio = "$24.990";
-            
-            // Mensaje automático
-            let mensaje = `Hola! 👋 Quiero pedir la *${producto}* a ${precio}.\n\nMis datos de envío son:\n- Nombre:\n- Dirección:\n- Comuna:\n\nQuedo atento!`;
-            
-            // Crear link y abrir
+            let precio = "${{ '{:,.0f}'.format(producto.precio).replace(',', '.') }}";
+            let mensaje = `Hola! 👋 Quiero pedir la *${producto}* a ${precio} con la Oferta Viral.\n\nMis datos de envío son:\n- Nombre:\n- Dirección:\n- Comuna:\n\nQuedo atento!`;
             let url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
             window.open(url, '_blank');
         }

@@ -3,93 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TurboCar Chile - Catálogo</title>
+    <title>TurboCar Chile - Ofertas Virales</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
 </head>
-<body class="bg-gray-50 flex flex-col min-h-screen">
+<body class="bg-gray-100 flex flex-col min-h-screen">
 
-    <nav class="bg-slate-900 text-white p-4 shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="/" class="text-xl font-bold italic flex items-center gap-2">
-                <i class="fas fa-car-side"></i>TurboCar<span class="text-red-500">Chile</span>
+    <div class="bg-blue-500 text-white text-xs md:text-sm font-bold text-center py-2 tracking-wide uppercase">
+        🔥 Envío Gratis solo por hoy • 50% DE DESCUENTO • Paga al Recibir 🏠
+    </div>
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/" class="text-2xl font-extrabold italic tracking-tighter text-slate-900">
+                <i class="fas fa-car-side text-blue-600"></i> TurboCar<span class="text-red-600">Chile</span>
             </a>
-            <button class="bg-red-600 px-3 py-1 rounded text-sm font-bold animate-pulse">OFERTAS</button>
+            <div class="flex items-center gap-4">
+                <a href="#catalogo" class="hidden md:block font-semibold text-gray-600 hover:text-blue-600">Catálogo</a>
+                <button class="text-gray-700 text-xl"><i class="fas fa-shopping-bag"></i></button>
+            </div>
         </div>
     </nav>
 
-    <div class="bg-slate-800 text-white py-12 px-4 text-center shadow-inner">
-        <h2 class="text-3xl font-bold mb-2">Renueva tu Auto Hoy</h2>
-        <p class="text-gray-300 mb-6">Accesorios virales con pago en casa 🏠</p>
-
-        <div class="max-w-md mx-auto relative">
-            <form action="/" method="GET">
-                <input 
-                    type="text" 
-                    name="q" 
-                    placeholder="¿Qué buscas? (Ej: Gel, Aspiradora...)" 
-                    value="{{ busqueda_actual if busqueda_actual else '' }}"
-                    class="w-full p-4 pl-6 rounded-full text-gray-800 shadow-xl focus:outline-none focus:ring-4 focus:ring-red-500/50 transition-all"
-                >
-                <button type="submit" class="absolute right-2 top-2 bg-red-600 text-white p-2 rounded-full w-10 h-10 hover:bg-red-700 transition flex items-center justify-center shadow-md">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
+    <div class="relative bg-slate-900 text-white overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900 to-slate-800 opacity-90"></div>
+        <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-40" alt="Fondo Auto">
+        
+        <div class="relative container mx-auto px-4 py-16 md:py-24 text-center">
+            <span class="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 inline-block animate-pulse">Oferta de Lanzamiento</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Innovación para <br>tu Vehículo</h1>
+            <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">Los productos más virales de TikTok ahora en Chile con pago contra entrega.</p>
+            
+            <div class="max-w-md mx-auto relative group">
+                <form action="/" method="GET">
+                    <input type="text" name="q" placeholder="¿Qué estás buscando? (Ej: Aspiradora)" value="{{ busqueda_actual if busqueda_actual else '' }}"
+                        class="w-full p-4 pl-6 rounded-full text-gray-900 shadow-2xl focus:outline-none focus:ring-4 focus:ring-blue-500 transition-all">
+                    <button type="submit" class="absolute right-2 top-2 bg-blue-600 text-white p-2 rounded-full w-10 h-10 hover:bg-blue-700 transition shadow-lg">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            {% if busqueda_actual %}
+            <div class="mt-4 text-sm text-gray-300">Resultados para: <b>"{{ busqueda_actual }}"</b> <a href="/" class="text-blue-400 underline ml-2">Borrar</a></div>
+            {% endif %}
         </div>
-
-        {% if busqueda_actual %}
-        <div class="mt-4 text-sm text-gray-300">
-            Mostrando resultados para: <b class="text-white">"{{ busqueda_actual }}"</b>
-            <a href="/" class="ml-2 underline text-red-400 hover:text-red-300">Borrar filtro</a>
-        </div>
-        {% endif %}
     </div>
 
-    <div class="container mx-auto p-4 -mt-6 mb-auto">
+    <div class="bg-white border-b border-gray-200 py-4">
+        <div class="container mx-auto px-4 flex justify-around text-center text-xs md:text-sm text-gray-600">
+            <div class="flex flex-col items-center gap-1"><i class="fas fa-truck text-blue-600 text-lg"></i><span>Envío Rápido</span></div>
+            <div class="flex flex-col items-center gap-1"><i class="fas fa-hand-holding-dollar text-green-600 text-lg"></i><span>Pago en Casa</span></div>
+            <div class="flex flex-col items-center gap-1"><i class="fas fa-shield-alt text-purple-600 text-lg"></i><span>Garantía</span></div>
+        </div>
+    </div>
+
+    <div id="catalogo" class="container mx-auto px-4 py-12 mb-auto">
+        <h2 class="text-3xl font-extrabold text-center text-slate-900 mb-2">🔥 Lo Más Vendido</h2>
+        <p class="text-center text-gray-500 mb-8">Productos seleccionados por expertos</p>
         
         {% if catalogo|length == 0 %}
-        <div class="text-center py-10">
-            <div class="text-6xl mb-4">😕</div>
-            <h3 class="text-xl font-bold text-gray-600">No encontramos productos con ese nombre.</h3>
-            <p class="text-gray-400">Intenta buscar "auto", "limpieza" o "gel".</p>
-            <a href="/" class="mt-4 inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-bold">Ver todo el catálogo</a>
-        </div>
+            <div class="text-center py-10 text-gray-500">No encontramos productos con ese nombre. <a href="/" class="text-blue-500 underline">Ver todo</a></div>
         {% else %}
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {% for p in catalogo %}
-            <a href="/producto/{{ p.id }}" class="block transform transition hover:-translate-y-1 hover:shadow-xl rounded-xl">
-                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 h-full flex flex-col">
-                    <div class="relative">
-                        <img src="{{ p.imagen }}" alt="{{ p.nombre }}" class="w-full h-48 object-cover">
-                        <span class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-sm">OFERTA</span>
-                    </div>
-                    <div class="p-4 flex-grow flex flex-col justify-between">
-                        <div>
-                            <h3 class="font-bold text-gray-800 text-lg truncate">{{ p.nombre }}</h3>
-                            <p class="text-gray-500 text-sm mt-1 line-clamp-2">{{ p.descripcion }}</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                {% for p in catalogo %}
+                <a href="/producto/{{ p.id }}" class="group block transform transition hover:-translate-y-1">
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 relative">
+                        <div class="absolute top-3 left-3 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-md shadow-md z-10">
+                            AHORRA ${{ "{:,.0f}".format(p.antes - p.precio).replace(',', '.') }}
                         </div>
-                        <div class="flex justify-between items-center mt-4 pt-4 border-t border-gray-50">
-                            <div>
-                                <span class="text-xs text-gray-400 line-through">${{ p.antes }}</span>
-                                <div class="text-xl font-black text-slate-800">${{ p.precio }}</div>
+                        
+                        <div class="relative overflow-hidden h-64 bg-gray-50">
+                            <img src="{{ p.imagen }}" alt="{{ p.nombre }}" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                        </div>
+                        
+                        <div class="p-5">
+                            <div class="flex text-yellow-400 text-xs mb-2">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                <span class="text-gray-400 ml-1">(+50 ventas)</span>
                             </div>
-                            <button class="bg-green-500 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition">
-                                <i class="fas fa-arrow-right"></i>
+                            <h3 class="font-bold text-slate-900 text-xl leading-tight mb-2">{{ p.nombre }}</h3>
+                            <div class="flex items-end gap-3 mt-4">
+                                <div class="text-2xl font-black text-slate-900">${{ "{:,.0f}".format(p.precio).replace(',', '.') }}</div>
+                                <span class="text-sm text-gray-400 line-through mb-1">${{ "{:,.0f}".format(p.antes).replace(',', '.') }}</span>
+                                <span class="text-xs text-green-600 font-bold bg-green-100 px-2 py-1 rounded mb-1">50% OFF</span>
+                            </div>
+                            <button class="w-full mt-4 bg-slate-900 text-white font-bold py-3 rounded-xl group-hover:bg-blue-600 transition shadow-lg">
+                                VER OFERTA <i class="fas fa-arrow-right ml-2"></i>
                             </button>
                         </div>
                     </div>
-                </div>
-            </a>
-            {% endfor %}
-        </div>
+                </a>
+                {% endfor %}
+            </div>
         {% endif %}
-
     </div>
 
-    <footer class="bg-slate-900 text-center text-gray-400 text-xs py-8 mt-8">
-        <p>© 2024 TurboCar Chile. Envíos a todo el país 🇨🇱</p>
-        <p class="mt-1">Sitio seguro 🔒</p>
+    <footer class="bg-slate-900 text-white text-center py-8 mt-8 border-t border-slate-800">
+        <p class="font-bold text-xl italic mb-2">TurboCar<span class="text-red-500">Chile</span></p>
+        <p class="text-gray-500 text-sm">© 2024 Todos los derechos reservados.</p>
     </footer>
 
 </body>
