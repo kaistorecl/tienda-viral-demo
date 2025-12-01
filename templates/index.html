@@ -12,12 +12,12 @@
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
         
-        /* Animación para el botón de video */
+        /* Animación de pulso para el botón de Play */
         .pulse-video { animation: pulse-red 2s infinite; }
         @keyframes pulse-red {
-            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
         }
     </style>
 </head>
@@ -36,15 +36,16 @@
             <div class="relative">
                 <div class="sticky top-24">
                     <div class="relative overflow-hidden rounded-2xl border border-gray-100 shadow-lg group">
-                        <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" class="w-full object-cover">
+                        <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" class="w-full object-cover aspect-square">
                         
-                        <div id="video-overlay" class="hidden absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition">
-                            <a id="video-link" href="#" target="_blank" class="pulse-video bg-red-600 text-white rounded-full w-20 h-20 flex items-center justify-center text-3xl shadow-2xl hover:scale-110 transition transform">
+                        <div id="video-overlay" class="hidden absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition">
+                            <a id="video-link" href="#" target="_blank" class="pulse-video bg-red-600 text-white rounded-full w-20 h-20 flex items-center justify-center text-4xl shadow-2xl hover:scale-110 transition transform">
                                 <i class="fas fa-play ml-1"></i>
                             </a>
                         </div>
-                        <div id="video-label" class="hidden absolute bottom-4 left-0 right-0 text-center">
-                            <span class="bg-black/70 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                        
+                        <div id="video-label" class="hidden absolute bottom-6 left-0 right-0 text-center pointer-events-none">
+                            <span class="bg-black/80 text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg backdrop-blur-sm">
                                 <i class="fab fa-tiktok mr-1"></i> Ver Video Viral
                             </span>
                         </div>
@@ -58,39 +59,40 @@
             </div>
 
             <div>
-                <span class="bg-red-600 text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-wider mb-2 inline-block">🔥 Tendencia TikTok</span>
+                <span class="bg-red-600 text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-wider mb-2 inline-block">🔥 Tendencia Viral</span>
                 <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight mb-2">{{ producto.nombre }}</h1>
                 
                 <div class="flex items-center gap-2 mb-4">
                     <div class="text-yellow-400 text-sm">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <span class="text-sm text-blue-600 underline font-medium">4.9/5 (Viral)</span>
+                    <span class="text-sm text-blue-600 underline font-medium">4.9/5 (Reseñas TikTok)</span>
                 </div>
 
                 <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 mb-6">
                     <span class="text-gray-500 text-sm font-medium">Precio Oferta:</span>
                     <div class="flex items-end gap-3 mt-1">
                         <span class="text-4xl font-black text-slate-900">${{ "{:,.0f}".format(producto.precio).replace(',', '.') }}</span>
-                        <span class="text-lg text-gray-400 line-through mb-1">${{ "{:,.0f}".format(producto.antes).replace(',', '.') }}</span>
+                        <span class="text-lg text-gray-400 line-through mb-1">${{ "{:,.0f}".format(producto.precio * 1.4).replace(',', '.') }}</span>
                     </div>
                     <p class="text-green-600 text-xs font-bold mt-2"><i class="fas fa-truck"></i> Envío Gratis a todo Chile</p>
                 </div>
 
                 <div class="mb-8">
-                    <h3 class="font-bold text-gray-900 mb-3">Descripción del Producto</h3>
-                    <p id="desc-text" class="text-gray-600 text-sm leading-relaxed mb-4">
-                        {{ producto.descripcion }}
-                    </p>
+                    <h3 class="font-bold text-gray-900 mb-3">Sobre este producto viral:</h3>
                     
-                    <ul class="space-y-3">
+                    <div id="desc-text" class="text-gray-600 text-sm leading-relaxed mb-4 whitespace-pre-line">
+                        {{ producto.descripcion }}
+                    </div>
+                    
+                    <ul class="space-y-3 mt-4">
                         <li class="flex items-start gap-3">
                             <i class="fas fa-check-circle text-green-500 mt-1"></i>
-                            <span class="text-gray-600 text-sm">Pago contra reembolso disponible.</span>
+                            <span class="text-gray-600 text-sm">Producto verificado en tendencias.</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <i class="fas fa-check-circle text-green-500 mt-1"></i>
-                            <span class="text-gray-600 text-sm">Garantía de satisfacción total.</span>
+                            <span class="text-gray-600 text-sm">Pago en casa disponible.</span>
                         </li>
                     </ul>
                 </div>
@@ -106,11 +108,21 @@
                 <div class="border-t border-gray-200">
                     <details class="group py-4 border-b border-gray-200 cursor-pointer">
                         <summary class="flex justify-between items-center font-bold text-gray-800">
-                            <span>📦 Envío y Entrega</span>
+                            <span>📦 Información de envío</span>
                             <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
                         </summary>
                         <div class="text-gray-600 text-sm mt-3 pl-4">
-                            <p>Enviamos a todo Chile vía BlueExpress o Starken. El tiempo de entrega es de 2 a 5 días hábiles.</p>
+                            <p>Enviamos a todo Chile vía BlueExpress o Starken. Tiempo estimado: 2-5 días hábiles.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="group py-4 border-b border-gray-200 cursor-pointer">
+                        <summary class="flex justify-between items-center font-bold text-gray-800">
+                            <span>🛡️ Garantía</span>
+                            <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                        </summary>
+                        <div class="text-gray-600 text-sm mt-3 pl-4">
+                            <p>Compra protegida. Si el producto llega dañado, lo reponemos sin costo.</p>
                         </div>
                     </details>
                 </div>
@@ -121,31 +133,41 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const descElement = document.getElementById('desc-text');
-            const rawText = descElement.innerHTML;
-            
-            // Buscamos el patrón [VIDEO]...[/VIDEO]
-            const videoRegex = /\[VIDEO\](.*?)\[\/VIDEO\]/;
-            const match = rawText.match(videoRegex);
-            
-            if (match) {
-                const videoUrl = match[1];
+            // 1. Buscamos el texto de la descripción
+            const descContainer = document.getElementById('desc-text');
+            if (descContainer) {
+                const rawText = descContainer.innerHTML;
                 
-                // 1. Limpiamos la descripción (quitamos el link feo)
-                descElement.innerHTML = rawText.replace(videoRegex, '');
+                // 2. Buscamos el patrón mágico [VIDEO]...link...[/VIDEO]
+                const videoRegex = /\[VIDEO\](.*?)\[\/VIDEO\]/;
+                const match = rawText.match(videoRegex);
                 
-                // 2. Activamos el botón de Play en la imagen
-                document.getElementById('video-overlay').classList.remove('hidden');
-                document.getElementById('video-label').classList.remove('hidden');
-                document.getElementById('video-link').href = videoUrl;
+                if (match) {
+                    const videoUrl = match[1]; // Capturamos el link
+                    
+                    // 3. Limpiamos el texto (borramos el código feo de la descripción visible)
+                    descContainer.innerHTML = rawText.replace(videoRegex, '').trim();
+                    
+                    // 4. Activamos el botón de Play sobre la imagen
+                    const overlay = document.getElementById('video-overlay');
+                    const label = document.getElementById('video-label');
+                    const link = document.getElementById('video-link');
+                    
+                    if (overlay && link) {
+                        overlay.classList.remove('hidden'); // Mostrar capa oscura
+                        label.classList.remove('hidden');   // Mostrar etiqueta "Ver Video"
+                        link.href = videoUrl;               // Ponerle el link al botón
+                    }
+                }
             }
         });
 
         function pedirPorWhatsApp() {
             let telefono = "56954055268"; 
             let producto = "{{ producto.nombre }}";
-            let precio = "${{ '{:,.0f}'.format(producto.precio).replace(',', '.') }}";
-            let mensaje = `Hola! 👋 Vi el video viral de *${producto}* (${precio}) y quiero pedirlo con Pago en Casa.\n\nMis datos:\n- Nombre:\n- Dirección:\n- Comuna:`;
+            // Limpieza básica del precio para formatear
+            let precioRaw = "{{ producto.precio }}"; 
+            let mensaje = `Hola! 👋 Vi el producto viral *${producto}* y quiero pedirlo con Pago en Casa.\n\nMis datos:\n- Nombre:\n- Dirección:\n- Comuna:`;
             let url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
             window.open(url, '_blank');
         }
